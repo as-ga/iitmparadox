@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Instagram, Youtube, Linkedin, Mail } from "lucide-react";
 
-export default function footer({ bgColor = "bg-blue-500" }) {
+export default function Footer({ bgColor = "bg-blue-500" }) {
   return (
     <footer className="px-5 py-10">
       <div
