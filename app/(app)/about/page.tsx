@@ -1,5 +1,5 @@
 import React from "react";
-import Image from 'next/image'
+import Image from "next/image";
 import Banner from "@/components/banner";
 import Footer from "@/components/footer";
 
@@ -20,19 +20,19 @@ export default function page() {
               join IITM as a student.
             </div>
             <div className="bg-white rounded-2xl w-full p-4 font-semibold right-0 xl:right-16 bottom-10 md:max-w-[350px] md:absolute" >
-              Gaja embodies the spirit of Paradox'24, a friendly, calm,
+              Gaja embodies the spirit of Paradox&#39;24, a friendly, calm,
               extroverted and curious companion on the vibrant journey of college
               life.
             </div>
             <div className="bg-white rounded-2xl w-full p-4 font-semibold md:absolute left-0 xl:left-20 bottom-10 md:max-w-[350px]" >
-              He's now an integral part of IITM, helping others with his vast
+              He&#39;s now an integral part of IITM, helping others with his vast
               experience: not just in academics, but at life too.
             </div>
           </div>
           <div className="w-full flex justify-center text-xs md:text-sm lg:text-base ">
             <div className="rounded-2xl w-full p-4 text-center md:max-w-[400px]" >
-              <div className="w-full font-semibold text-[#BB6969]">Paradox'24-il Gajaa-ai sandhikkavum</div>
-              <div className="w-full font-bold">Tamil theriyadha ?</div><div className="w-full font-bold text-[#BB6969]">Meet Gaja at Paradox '24</div>
+              <div className="w-full font-semibold text-[#BB6969]">Paradox&#39;24-il Gajaa-ai sandhikkavum</div>
+              <div className="w-full font-bold">Tamil theriyadha ?</div><div className="w-full font-bold text-[#BB6969]">Meet Gaja at Paradox &#39;24</div>
             </div>
           </div>
 
@@ -67,7 +67,7 @@ export default function page() {
                       IS PARADOX FOR YOU ?</h4>
                     <div className="grid gap-6">
                       <p>
-                        <b>Absolutely!</b> Whether you're a student, a professional, or just someone who loves to explore new things, Paradox welcomes you with open arms.</p>
+                        <b>Absolutely!</b> Whether you&#39;re a student, a professional, or just someone who loves to explore new things, Paradox welcomes you with open arms.</p>
                     </div>
                   </div>
                   <Image src="/about/about2.svg" alt="Paradox 2" width={1000} height={1000} />
@@ -76,7 +76,7 @@ export default function page() {
                   <div className="p-8">
                     <h4 className="text-2xl text-white fond-bold">30th MAY - 2nd JUNE</h4>
                     <div className="grid gap-6">
-                      <p>Paradox is more than just a fest , it's an experience. Let's Level up your network beyond your DMs!</p>
+                      <p>Paradox is more than just a fest , it&#39;s an experience. Let&#39;s Level up your network beyond your DMs!</p>
                     </div>
                   </div>
                   <Image src="/about/about4.svg" alt="Paradox 4" width={1000} height={1000} />
