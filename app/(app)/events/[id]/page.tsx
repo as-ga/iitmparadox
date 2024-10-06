@@ -7,8 +7,8 @@ import { MapPin, Calendar } from 'lucide-react'
 import { useSession } from "next-auth/react";
 import Login from '@/components/login'
 import { User } from "next-auth";
-
 export default function Page() {
+    const [isLoading, setIsLoading] = useState(false)
     const [userEventRegistered, setUsrEventRegistered] = useState(false)
     const [event, setEvent] = useState({
         _id: "",
@@ -44,10 +44,13 @@ export default function Page() {
     const router = useRouter()
     const eventRegistration = async () => {
         try {
-            await axios.post(`/api/register?eventId=${id}`)
+            setIsLoading(true)
+            await axios.post("/api/register", { eventId: id })
             router.replace("/profile")
         } catch (error) {
             alert(error || "Something went wrong")
+        } finally {
+            setIsLoading(false)
         }
     }
     return (
@@ -55,7 +58,7 @@ export default function Page() {
 
             <Image
                 className='w-full h-1/6'
-                src='/events/genai_banner.webp'
+                src={event.image}
                 alt={event.title}
                 width={5000}
                 height={500}
@@ -101,7 +104,11 @@ export default function Page() {
             ) : (
                 <div className="mt-5 rounded-2xl w-full flex items-center justify-center bg-gray-600 p-3 hover:bg-gray-700 transition-colors duration-300" >
                     <button
-                        onClick={eventRegistration}>Register</button>
+                        disabled={isLoading}
+                        onClick={eventRegistration}>
+
+                        {isLoading ? "Registering..." : "Register"}
+                    </button>
                 </div>
             )) : (
                 <div className="mt-5 rounded-2xl w-full flex flex-col gap-2 items-center justify-center bg-gray-600 p-3 hover:bg-gray-700 transition-colors duration-300" >
@@ -109,8 +116,6 @@ export default function Page() {
                     <Login />
                 </div>
             )}
-
-
         </div >
     )
 }
