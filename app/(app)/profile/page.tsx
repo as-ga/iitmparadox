@@ -1,25 +1,43 @@
 'use client'
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Banner from "@/components/banner";
-import { useSession as Session, signIn, signOut } from "next-auth/react";
+import { useSession as Session, signOut } from "next-auth/react";
 import { User } from "next-auth";
 import Footer from '@/components/footer'
+import Login from "@/components/login";
+import Image from "next/image";
+import Link from "next/link";
+import axios from "axios";
 
-export default function page() {
+
+export default function Page() {
   const { data: session } = Session();
   const user: User = session?.user as User
 
-  const googleLogin = async () => {
-    await signIn("google", { redirect: false, });
-  };
+  const [events, setEvents] = useState([])
+  // const [userData, setUserData] = useState(null)
+
+  const getData = async () => {
+    const result = await axios.post('/api/user', {
+      email: user.email
+    })
+    setEvents(result.data.events)
+    // setUserData(result.data.user)
+  }
+
+  useEffect(() => {
+    if (user) getData()
+  }, [user])
+
+
   return (
     <div>
       <Banner title="PROFILE" bgColor="bg-purple-800" bigCircle="bg-purple-900" smallCircle="bg-purple-950" />
       {session ? (
         <>
-          <span className="mr-4 bg-purple-500">Welcome, {user.name}</span>
-          <span className="mr-4">Welcome, {user.email}</span>
+          <span className="mr-4 bg-purple-500">Welcome, {user?.name}</span>
+          <span className="mr-4">Email : , {user?.email}</span>
           <Button
             onClick={() => signOut()}
             className="w-full md:w-auto bg-slate-100 text-black"
@@ -27,23 +45,35 @@ export default function page() {
           >
             Logout
           </Button>
+          <div className="mt-10 m-5 grid lg:grid-cols-4 md:grid-cols-2 gap-6">
+            {events.length > 0 && events.map((event: {
+              name: string,
+              image: string,
+              _id: string
+            }) => (
+              <div key={event.name}>
+                <Link href={`/events/${event._id}`} className="after:absolute after:inset-0">
+                  <Image alt={event.name}
+                    loading="lazy" width={500}
+                    height={500}
+                    decoding="async"
+                    data-nimg="1" className="w-full h-auto"
+                    src={event.image} style={{ color: "transparent" }} />
+                  <h2 className="text-xl font-bold text-center mt-2">{event.name}</h2>
+                </Link>
+              </div>
+            ))}
+          </div>
         </>
       ) : (
-
-
         <div className=" flex  items-center flex-col">
           <h2 className="text-2xl mt-2 mb-4">Please login to continue.</h2>
-          <button
-            onClick={googleLogin}
-            className="p-2 border border-gray-300 rounded-full bg-white flex gap-2 ">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="LgbsSe-Bz112c h-5"><g><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></g></svg>
-            <span>Sign in</span>
-
-          </button>
+          <Login className="w-full md:w-auto bg-slate-100 text-black" />
         </div>
 
       )}
+
       <Footer bgColor="bg-purple-800" />
     </div>
-  );
+  )
 }

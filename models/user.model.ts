@@ -19,7 +19,13 @@ const UserSchema: Schema<User> = new Schema(
       enum: ["User", "Admin", "EventManager"],
     },
     avatar: { type: String },
-    eventsRegistered: [{ type: Schema.Types.ObjectId, ref: "Event" }],
+    eventsRegistered: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Event",
+        unique: { value: true, message: "Event already registered" },
+      },
+    ],
   },
   { timestamps: true }
 );
