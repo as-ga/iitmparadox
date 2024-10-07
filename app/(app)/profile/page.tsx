@@ -52,19 +52,19 @@ export default function Page() {
           </div>
           <div className="mt-10 m-5 grid lg:grid-cols-4 md:grid-cols-2 gap-6">
             {events.length > 0 && events.map((event: {
-              name: string,
+              title: string,
               image: string,
               _id: string
             }) => (
-              <div key={event.name}>
+              <div key={event.title}>
                 <Link href={`/events/${event._id}`} className="after:absolute after:inset-0">
-                  <Image alt={event.name}
+                  <Image alt={event.title}
                     loading="lazy" width={500}
                     height={500}
                     decoding="async"
                     data-nimg="1" className="w-full h-auto"
                     src={event.image} style={{ color: "transparent" }} />
-                  <h2 className="text-xl font-bold text-center mt-2">{event.name}</h2>
+                  <h2 className="text-xl font-bold text-center mt-2">{event.title}</h2>
                 </Link>
               </div>
             ))}
