@@ -36,15 +36,20 @@ export default function Page() {
       <Banner title="PROFILE" bgColor="bg-purple-800" bigCircle="bg-purple-900" smallCircle="bg-purple-950" />
       {session ? (
         <>
-          <span className="mr-4 bg-purple-500">Welcome, {user?.name}</span>
-          <span className="mr-4">Email : , {user?.email}</span>
-          <Button
-            onClick={() => signOut()}
-            className="w-full md:w-auto bg-slate-100 text-black"
-            variant="outline"
-          >
-            Logout
-          </Button>
+          <div className="flex p-10 gap-10 w-full justify-center items-center">
+            <div className="flex flex-col font-bold gap-5 mr-10">
+              <h3 className=" text-2xl">Welcome, {user?.name}</h3>
+              <h5 className="text-xl">Email :  {user?.email}</h5>
+              <Button
+                onClick={() => signOut()}
+                className="w-full md:w-auto bg-slate-100 text-black"
+                variant="outline"
+              >
+                Logout
+              </Button>
+            </div>
+            <img src={user?.image || "/event/genai_banner.webp"} height={500} width={500} alt={user?.name || "user"} className="rounded-full ml-20" />
+          </div>
           <div className="mt-10 m-5 grid lg:grid-cols-4 md:grid-cols-2 gap-6">
             {events.length > 0 && events.map((event: {
               name: string,
@@ -72,6 +77,8 @@ export default function Page() {
         </div>
 
       )}
+
+
 
       <Footer bgColor="bg-purple-800" />
     </div>
