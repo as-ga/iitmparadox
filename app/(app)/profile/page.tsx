@@ -48,7 +48,7 @@ export default function Page() {
                 Logout
               </Button>
             </div>
-            <img src={user?.image || "/event/genai_banner.webp"} height={500} width={500} alt={user?.name || "user"} className="rounded-full ml-20" />
+            <img src={user?.image || "/event/genai_banner.webp"} height={500} width={500} alt={user?.name || "user"} className="rounded-full ml-20 max-w-96" />
           </div>
           <div className="mt-10 m-5 grid lg:grid-cols-4 md:grid-cols-2 gap-6">
             {events.length > 0 && events.map((event: {
